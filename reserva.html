@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da reserva</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+</head>
+<body>
+
+    <!--meter aqui o navbar-->
+
+    <div class="container">
+        <h3>Faça a sua reserva</h3>
+        <div class="card">
+            <div class="row">
+                <div class="card-body" style="width:55%">
+                    <h5 class="card-title">Total - 0,00€</h5>
+                    <h5 class="card-title">0h00m - 0h00m</h5>
+                    <p class="card-text">Detalhes</p>
+                    <button class="btn btn-outline-secondary">Aplicar descontos</button> <!--abrir modal eventuaalmente-->
+                </div>
+                <div id="map" style="height: 200px; width:45%"></div>
+            </div>
+        </div>
+        <form>
+            <div class="mb-3">
+                <label for="origem" class="form-label">Número de passageiros</label>
+                <input type="text" class="form-control form-control-lg" id="numero" name="numero" placeholder="1">
+            </div>
+            <div class="mb-3">
+                <label for="origem" class="form-label">Pasageiro 1</label>
+                <input type="text" class="form-control form-control-lg" name="passageiro" placeholder="Nome">
+            </div>
+            <div class="mb-3">
+                <label for="origem" class="form-label">Contacto</label>
+                <input type="text" class="form-control form-control-lg" name="conatcto" id="contacto" placeholder="Contacto">
+            </div>
+            <button class="btn btn-dark float-end">Seguinte</button>
+        </form>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script>
+        var map = L.map('map').setView([39.521111, -8.089217], 6);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
+</body>
+</html>
