@@ -7,11 +7,51 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <link href="StyleSheet.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
-        <div class="container">
+    <nav class="navbar fixed-top mb-1 pb-1">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Confybus Empresas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="empGestao.html">Gerir paragens, linhas e
+                                horários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="empFrota.html">Monotorizar frota</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Estatísticas de passageiros</a>
+                        </li>
+                    </ul>
+                </div>
+                <span><button type="button" class="btn" aria-label="Sobre nós">Sobre nós</button></span>
+                <span><button type="button" class="btn" aria-label="Logout">Logout</button></span>
+                <span><button type="button" class="btn" aria-label="Sair">Sair</button></span>
+            </div>
+            <div class="text-center">
+                <h1>ConfyBus Empresas</h1>
+            </div>
+            <button class="btn btn-lg btn-outline-success" type="submit">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+
+        <div class="container pt-3">
             <div class="row text-center">
                 <div class="col-lg-8" id="map" aria-rowspan="3" style="height: 500px"></div>
                 <div class="col-lg-4 card" style="height: 500px;">
