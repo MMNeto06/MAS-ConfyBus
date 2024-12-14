@@ -59,9 +59,9 @@
                         <h1 class="card-title">Gestão da sua rede</h1>
                         <div class="card-text">
                             <ul style="list-style-type: none;">
-                                <li class="pb-3"><button type="button" class="btn btn-lg btn-primary">Adicionar/Alterar paragens</button></li>
-                                <li class="pb-3"><button type="button" class="btn btn-lg btn-primary">Adicionar/Alterar linha</button></li>
-                                <li class="pb-3"><button type="button" class="btn btn-lg btn-primary">Ajustar horários</button></li>
+                                <li class="pb-3"><button type="button" id="paragem" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#paragemModal">Adicionar/Alterar paragens</button></li>
+                                <li class="pb-3"><button type="button" id="linha" class="btn btn-lg btn-primary">Adicionar/Alterar linha</button></li>
+                                <li class="pb-3"><button type="button" id="horario" class="btn btn-lg btn-primary">Ajustar horários</button></li>
                             </ul>
                         </div>
                     </div>
@@ -69,7 +69,36 @@
                 </div>
             </div>
         </div>
-
+        <div class="modal fade" id="paragemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar uma paragem</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="lat" placeholder="Latitude">
+                            <label for="lat">Latitude</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="lon" placeholder="Longitude">
+                            <label for="lat">Longitude</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="name" placeholder="Nome da paragem">
+                            <label for="lat">Nome da Paragem</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="addParagem">Adicionar</button>
+                    </div>
+                    <div class="col-lg-8" id="mapParagem" style="height: 500px; width: 500px"></div>
+                </div>
+            </div>
+        </div>
+                   
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
@@ -78,12 +107,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script>
-        var map = L.map('map').setView([39.521111, -8.089217], 6);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-    </script>
+    <script src="empGestao.js"></script>
 </body>
 </html>
