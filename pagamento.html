@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Detalhes da conta</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <link href="StyleSheet.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin-top: 100px;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        #multibanco-card {
+            width: 50%;
+            margin: 0 auto 100px auto; 
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="navbar fixed-top mb-1 pb-1">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Confybus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="procurar.html">Procurar autocarros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mapaTempoReal.html">Mapa ao vivo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">ConfyFlex</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Viagens reservadas</a>
+                        </li>
+                    </ul>
+                </div>
+                <span><button type="button" class="btn" aria-label="Sobre nós">Sobre nós</button></span>
+                <span><button type="button" class="btn" aria-label="Logout">Logout</button></span>
+                <span><button type="button" class="btn" aria-label="Sair">Sair</button></span>
+            </div>
+            <div class="text-center">
+                <h1>ConfyBus</h1>
+            </div>
+            <button class="btn btn-lg btn-outline-success" type="submit">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+    <!-- ko ifnot: showMultibanco && showPayPal && showCartao && showMBWay-->
+    <div class="payment-container" >
+        <!-- Multibanco -->
+        <div class="payment-option" data-bind="click: selectMultibanco">
+            <div class="payment-text">
+                <img src="assets/img/mb.png" alt="Multibanco">
+                Multibanco
+            </div>
+            <div class="payment-arrow">➔</div>
+        </div>
+        <!-- PayPal -->
+        <div class="payment-option" data-bind="click: selectPayPal">
+            <div class="payment-text">
+                <img src="assets/img/paypal.png" alt="PayPal">
+                PayPal
+            </div>
+            <div class="payment-arrow">➔</div>
+        </div>
+        <!-- Cartão bancário -->
+        <div class="payment-option" data-bind="click: selectCartao">
+            <div class="payment-text">
+                <img src="assets/img/visa.png" alt="Cartão bancário">
+                Cartão bancário
+            </div>
+            <div class="payment-arrow">➔</div>
+        </div>
+        <!-- MB WAY -->
+        <div class="payment-option" data-bind="click: selectMBWay">
+            <div class="payment-text">
+                <img src="assets/img/mb_way.png" alt="MB WAY">
+                MB WAY
+            </div>
+            <div class="payment-arrow">➔</div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: showMultibanco -->
+    <div class="card mt-3" id="multibanco-card">
+        <div class="card-body" >
+            <h2 class="card-title">Referência Multibanco</h2>
+            <p class="card-text">Entidade: <span data-bind="text: entidade"></span></p>
+            <p class="card-text">Referência: <span data-bind="text: referencia"></span></p>
+            <p class="card-text">Valor: <span data-bind="text: valor"></span>€</p>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: showPayPal -->
+    <div class="paypal-container">
+        <div class="paypal-text">
+            <h2>PayPal</h2>
+            <p>Para pagar com PayPal, clique no botão abaixo.</p>
+            <button class="btn btn-primary">Pagar com PayPal</button>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: showCartao -->
+    <div class="cartao-container">
+        <div class="cartao-text">
+            <h2>Cartão bancário</h2>
+            <p>Para pagar com cartão bancário, insira os dados do seu cartão.</p>
+            <form>
+                <div class="mb-3">
+                    <label for="cardNumber" class="form-label">Número do cartão</label>
+                    <input type="text" class="form-control" id="cardNumber">
+                </div>
+                <div class="mb-3">
+                    <label for="cardName" class="form-label">Nome no cartão</label>
+                    <input type="text" class="form-control" id="cardName">
+                </div>
+                <div class="mb-3">
+                    <label for="cardDate" class="form-label">Data de validade</label>
+                    <input type="text" class="form-control" id="cardDate">
+                </div>
+                <div class="mb-3">
+                    <label for="cardCVC" class="form-label">CVC</label>
+                    <input type="text" class="form-control" id="cardCVC">
+                </div>
+                <button type="submit" class="btn btn-primary">Pagar</button>
+            </form>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: showMBWay -->
+    <div class="mbway-container">
+        <div class="mbway-text">
+            <h2>MB WAY</h2>
+            <p>Para pagar com MB WAY, insira o seu número de telemóvel.</p>
+            <form>
+                <div class="mb-3">
+                    <label for="mbwayNumber" class="form-label">Número de telemóvel</label>
+                    <input type="text" class="form-control" id="mbwayNumber">
+                </div>
+                <button type="submit" class="btn btn-primary">Pagar</button>
+            </form>
+        </div>
+    </div>
+    <!-- /ko -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script>
+        function ViewModel() {
+            var self = this;
+            self.showMultibanco = ko.observable(false);
+            self.showPayPal = ko.observable(false);
+            self.showCartao = ko.observable(false);
+            self.showMBWay = ko.observable(false);
+            self.selectMultibanco = function() {
+                self.showMultibanco(true);
+                self.showPayPal(false);
+                self.showCartao(false);
+                self.showMBWay(false);
+            };
+            self.selectPayPal = function() {
+                self.showMultibanco(false);
+                self.showPayPal(true);
+                self.showCartao(false);
+                self.showMBWay(false);
+            };
+            self.selectCartao = function() {
+                self.showMultibanco(false);
+                self.showPayPal(false);
+                self.showCartao(true);
+                self.showMBWay(false);
+            };
+            self.selectMBWay = function() {
+                self.showMultibanco(false);
+                self.showPayPal(false);
+                self.showCartao(false);
+                self.showMBWay(true);
+            };
+        }
+        ko.applyBindings(new ViewModel());
+    </script>
+</body>
+</html>
