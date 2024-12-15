@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+      
+        .ticket-container {
+            background: rgb(198, 196, 196);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin-top: 70px; /* Espaço para a nav bar */
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .tabs button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: #eaeaea;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .tabs button.active {
+            background: #a1d0f7;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        table tr:first-child {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .qr-code {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .qr-code img {
+            max-width: 100px;
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar fixed-top mb-1 pb-1">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Confybus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="procurar.html">Procurar autocarros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mapaTempoReal.html">Mapa ao vivo</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">ConfyFlex</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Viagens reservadas</a>
+                        </li>
+                    </ul>
+                </div>
+                <span><button type="button" class="btn" aria-label="Sobre nós">Sobre nós</button></span>
+                <span><button type="button" class="btn" aria-label="Logout">Logout</button></span>
+                <span><button type="button" class="btn" aria-label="Sair">Sair</button></span>
+            </div>
+            <div class="text-center">
+                <h1>ConfyBus</h1>
+            </div>
+            <button class="btn btn-lg btn-outline-success" type="submit">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Ticket Content -->
+    <div class="ticket-container">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="active">Upcoming</button>
+            <button>Past</button>
+        </div>
+
+        <!-- First Table -->
+        <table>
+            <tr>
+                <td>DEPART</td>
+                <td>2024-12-06</td>
+                <td>ARRIVE</td>
+            </tr>
+            <tr>
+                <td>15.30</td>
+                <td>rede expressos</td>
+                <td>16:30</td>
+            </tr>
+            <tr>
+                <td>Aveiro</td>
+                <td>01h:45m</td>
+                <td>Figueira da Foz</td>
+            </tr>
+            <tr>
+                <td>Booking</td>
+                <td>Price</td>
+                <td>Ticket</td>
+
+            </tr>
+            <tr>
+                <td>RKHPWGG</td>
+                <td>5.95€</td>
+                <td>3449456346446</td>
+            </tr>
+        </table>
+
+        <!-- Second Table -->
+        <table>
+            <tr>
+                <td>Passenger</td>
+                <td>Type</td>
+                <td>ConfyFlex</td>
+         
+            </tr>
+            <tr>
+                <td>Joaquim Alberto</td>
+                <td>Youth (23 to 29)</td>
+                <td>879653</td>
+            </tr>
+            <hr>
+            <tr>
+                <td>Station</td>
+                <td>Departure</td>
+                <td>Seat</td>
+                <td>Bus</td>
+                
+            </tr>
+            <tr>
+                <td>Aveiro</td>
+                <td>19:00</td>
+                <td>19</td>
+                <td>8</td>
+                
+            </tr>
+        </table>
+
+        <!-- QR Code -->
+        <div class="qr-code">
+            <img src="qrcode.png" alt="">
+        </div>
+    </div>
+</body>
+</html>

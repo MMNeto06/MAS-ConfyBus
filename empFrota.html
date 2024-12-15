@@ -7,14 +7,151 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <link href="StyleSheet.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
+    <nav class="navbar fixed-top mb-1 pb-1">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Confybus Empresas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="empGestao.html">Gerir paragens, linhas e
+                                horários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="empFrota.html">Monotorizar frota</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Estatísticas de passageiros</a>
+                        </li>
+                    </ul>
+                </div>
+                <span><button type="button" class="btn" aria-label="Sobre nós">Sobre nós</button></span>
+                <span><button type="button" class="btn" aria-label="Logout">Logout</button></span>
+                <span><button type="button" class="btn" aria-label="Sair">Sair</button></span>
+            </div>
+            <div class="text-center">
+                <h1>ConfyBus Empresas</h1>
+            </div>
+            <button class="btn btn-lg btn-outline-success" type="submit">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container pb-3">
+        <h1 class="text-center">Mapa dos autocarros em circulação</h1>
+        <div id="map" style="height: 500px;"></div>
+        <h1 class="text-center">Visão geral do desempenho da frota</h1>
+
+        <div class="row">
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top" alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Autocarros</h5>
+                    <p class="card-text">Gráfico representando todos os autocarros atualmente em circulação e fora de serviço</p>
+                </div>
+            </div>
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
+                    alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Autocarros por linha</h5>
+                    <p class="card-text">Gráfico representando a distribuição dos autocarros por linha</p>
+                </div>
+            </div>
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
+                    alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Quilómetros percorridos linha</h5>
+                    <p class="card-text">Gráfico de barras representando quantos quilómetros foram percorridos pelos autocarros de cada linha</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
+                    alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Custos</h5>
+                    <p class="card-text">Gráfico de barras representando a distribuição dos custos, incluindo manutenção,
+                        combustível, etc.</p>
+                </div>
+            </div>
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
+                    alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Custos por linha</h5>
+                    <p class="card-text">Gráfico representando quanto é que cada linha consome</p>
+                </div>
+            </div>
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
+                    alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Custos por mês</h5>
+                    <p class="card-text">Gráfico de barras que mostra quanto dinheiro está a ser gasto por mês</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
+                    alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Lucros</h5>
+                    <p class="card-text">Gráfico mostrando quaanto foi gasto e quanto foi lucrado</p>
+                </div>
+            </div>
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
+                    alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Lucros por linha</h5>
+                    <p class="card-text">Gráfico representando quanto é que cada linha lucra</p>
+                </div>
+            </div>
+            <div class="card col-4">
+                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
+                    alt="placeholder">
+                <div class="card-body">
+                    <h5 class="card-title">Lucros por mês</h5>
+                    <p class="card-text">Gráfico de barras que mostra quais são os lucros por mês</p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     
-
-
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script>
+        var map = L.map('map').setView([39.521111, -8.089217], 6);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 20,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
 </body>
 </html>
