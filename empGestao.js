@@ -131,8 +131,21 @@ $(document).ready(function(){
                     novaLInha.splice(remove, 1);
                 }
                 console.log(novaLInha)
+
+                const $listagem = $("#paragensLista")
+                $listagem.empty();
+                $listagem.append('<ul class="list-group">')
+                for (var i = 0; i < novaLInha.length; i++) {
+                    const check = `
+                        <li class="list-group-item">${paragensNomes[novaLInha[i]]}</li>
+                    `;
+                    $listagem.append(check);
+                }
+                $listagem.append('</ul>')
             });
         })
+
+        
     })
 
     $('#fecharLinha').click(function () {
@@ -175,6 +188,11 @@ $(document).ready(function(){
             linhasCoords.push(novaLInhaCoords);
             linhasCores.push(cor);
             linhasNomes.push(nome);
+            $("#linhaModal").modal('hide');
+            L.polyline(novaLInhaCoords, { color: cor}).bindPopup(nome).addTo(map);
+        }
+        else{
+            alert("Faltam dados para adicionar a linha")
         }
     })
 });
