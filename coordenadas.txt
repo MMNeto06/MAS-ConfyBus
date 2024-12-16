@@ -1,0 +1,11 @@
+vou guardar aqui um monte de coordendas se quiserem usá-las podem à vontade fazendo ctrl c ctrl v
+Terminal Rodoviário de Aveiro - [40.643959, -8.638941]
+Camara de Ilhavo - [40.600178, -8.666425]
+Bombeiros Vagos - [40.552929, -8.678053]
+Mira - [40.428381, -8.736320]
+Figueira da Foz (Estação CP) - [40.148324, -8.848864]
+Sever do Vouga Central de Camionagem - [40.725848, -8.366410]
+Albergaria - [40.689300, -8.475258]
+Estarreja - [40.751342, -8.574918]
+Válega - [40.834232, -8.580066]
+Ovar - [40.860998, -8.622156]

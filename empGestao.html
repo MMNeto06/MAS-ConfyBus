@@ -7,11 +7,51 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <link href="StyleSheet.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 <body>
-        <div class="container">
+    <nav class="navbar fixed-top mb-1 pb-1">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Confybus Empresas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="empGestao.html">Gerir paragens, linhas e
+                                horários</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="empFrota.html">Monotorizar frota</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Estatísticas de passageiros</a>
+                        </li>
+                    </ul>
+                </div>
+                <span><button type="button" class="btn" aria-label="Sobre nós">Sobre nós</button></span>
+                <span><button type="button" class="btn" aria-label="Logout">Logout</button></span>
+                <span><button type="button" class="btn" aria-label="Sair">Sair</button></span>
+            </div>
+            <div class="text-center">
+                <h1>ConfyBus Empresas</h1>
+            </div>
+            <button class="btn btn-lg btn-outline-success" type="submit">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </button>
+        </div>
+    </nav>
+
+        <div class="container pt-3">
             <div class="row text-center">
                 <div class="col-lg-8" id="map" aria-rowspan="3" style="height: 500px"></div>
                 <div class="col-lg-4 card" style="height: 500px;">
@@ -19,9 +59,9 @@
                         <h1 class="card-title">Gestão da sua rede</h1>
                         <div class="card-text">
                             <ul style="list-style-type: none;">
-                                <li class="pb-3"><button type="button" class="btn btn-lg btn-primary">Adicionar/Alterar paragens</button></li>
-                                <li class="pb-3"><button type="button" class="btn btn-lg btn-primary">Adicionar/Alterar linha</button></li>
-                                <li class="pb-3"><button type="button" class="btn btn-lg btn-primary">Ajustar horários</button></li>
+                                <li class="pb-3"><button type="button" id="paragem" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#paragemModal">Adicionar/Alterar paragens</button></li>
+                                <li class="pb-3"><button type="button" id="linha" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#linhaModal">Adicionar/Alterar linha</button></li>
+                                <li class="pb-3"><button type="button" id="horario" class="btn btn-lg btn-primary">Ajustar horários</button></li>
                             </ul>
                         </div>
                     </div>
@@ -29,7 +69,71 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="paragemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar uma paragem</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="lat" placeholder="Latitude">
+                            <label for="lat">Latitude</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="lon" placeholder="Longitude">
+                            <label for="lat">Longitude</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="nameParagem" placeholder="Nome da paragem">
+                            <label for="lat">Nome da Paragem</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="addParagem">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="modal fade" id="linhaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar uma linha</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-floating col-6">
+                                <input type="text" class="form-control" id="nameLinha" placeholder="Nome da linha">
+                                <label for="lat">Nome da Linha</label>
+                            </div>
+                            <div class="form-floating col-6">
+                                <input type="text" class="form-control" id="corLinha" placeholder="Cor da linha">
+                                <label for="lat">Cor da Linha</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6" id="paragensChecks">
+                                <!--checkboxes vão aqui-->
+                            </div>
+                            <div class="col6" id="paragensLista"> 
+                                <!--paragens em ordem vão aqui-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="addlinha">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+                   
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
@@ -38,12 +142,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script>
-        var map = L.map('map').setView([39.521111, -8.089217], 6);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-    </script>
+    <script src="empGestao.js"></script>
 </body>
 </html>
