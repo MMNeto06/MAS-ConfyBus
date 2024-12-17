@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConfyBus Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">ConfyBus Estatísticas</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="demograficos.html">Dados Demográficos</a></li>
+                <li class="nav-item"><a class="nav-link" href="utilizacao.html">Padrões de Utilização</a></li>
+                <li class="nav-item"><a class="nav-link" href="rotas.html">Rotas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Dashboard ConfyBus</h1>
+        <p class="text-center">Estatísticas gerais de passageiros da ConfyBus, incluindo demografia, padrões de utilização e desempenho das rotas.</p>
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="faixaEtariaChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="horasPicoChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        new Chart(document.getElementById('faixaEtariaChart'), {
+            type: 'bar',
+            data: {
+                labels: ['0-12', '13-18', '19-30', '31-60', '60+'],
+                datasets: [{ label: 'Faixa Etária', data: [60, 150, 400, 300, 120], backgroundColor: '#FF8C00' }]
+            },
+            options: { responsive: true, plugins: { title: { display: true, text: 'Distribuição de Faixas Etárias' } } }
+        });
+
+        new Chart(document.getElementById('horasPicoChart'), {
+            type: 'line',
+            data: {
+                labels: ['6h', '9h', '12h', '15h', '18h', '21h'],
+                datasets: [{ label: 'Picos de Passageiros', data: [50, 300, 150, 180, 400, 120], borderColor: '#007BFF', fill: true }]
+            },
+            options: { responsive: true, plugins: { title: { display: true, text: 'Picos de Horários de Utilização' } } }
+        });
+    </script>
+</body>
+</html>
