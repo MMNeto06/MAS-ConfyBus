@@ -34,20 +34,20 @@
                             <a class="nav-link" href="empFrota.html">Monotorizar frota</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Estatísticas de passageiros</a>
+                            <a class="nav-link" href="empPassageiros.html">Estatísticas de passageiros</a>
                         </li>
                     </ul>
                 </div>
-                <span><button type="button" class="btn" aria-label="Sobre nós">Sobre nós</button></span>
-                <span><button type="button" class="btn" aria-label="Logout">Logout</button></span>
+                <span><a href="contatos.html" target="_blank"><button type="button" class="btn" aria-label="Sobre nós">Sobre nós</button></a></span>
+                <span><a href="index.html"><button type="button" class="btn" aria-label="Logout">Logout</button></a></span>
                 <span><button type="button" class="btn" aria-label="Sair">Sair</button></span>
             </div>
             <div class="text-center">
                 <h1>ConfyBus Empresas</h1>
             </div>
-            <button class="btn btn-lg btn-outline-success" type="submit">
+            <a href="empVerConta.html"><button class="btn btn-lg btn-outline-success" type="submit">
                 <i class="fa fa-user" aria-hidden="true"></i>
-            </button>
+            </button></a>
         </div>
     </nav>
 
@@ -59,8 +59,8 @@
                         <h1 class="card-title">Gestão da sua rede</h1>
                         <div class="card-text">
                             <ul style="list-style-type: none;">
-                                <li class="pb-3"><button type="button" id="paragem" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#paragemModal">Adicionar/Alterar paragens</button></li>
-                                <li class="pb-3"><button type="button" id="linha" class="btn btn-lg btn-primary">Adicionar/Alterar linha</button></li>
+                                <li class="pb-3"><button type="button" id="paragem" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#paragemModal">Adicionar paragens</button></li>
+                                <li class="pb-3"><button type="button" id="linha" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#linhaModal">Adicionar linha</button></li>
                                 <li class="pb-3"><button type="button" id="horario" class="btn btn-lg btn-primary">Ajustar horários</button></li>
                             </ul>
                         </div>
@@ -68,6 +68,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="container" id="horarios">
+            
         </div>
         <div class="modal fade" id="paragemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -86,7 +90,7 @@
                             <label for="lat">Longitude</label>
                         </div>
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="name" placeholder="Nome da paragem">
+                            <input type="text" class="form-control" id="nameParagem" placeholder="Nome da paragem">
                             <label for="lat">Nome da Paragem</label>
                         </div>
                     </div>
@@ -94,7 +98,42 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" id="addParagem">Adicionar</button>
                     </div>
-                    <div class="col-lg-8" id="mapParagem" style="height: 500px; width: 500px"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="linhaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar uma linha</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="fecharLinha"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="form-floating col-6">
+                                <input type="text" class="form-control" id="nameLinha" placeholder="Nome da linha">
+                                <label for="lat">Nome da Linha</label>
+                            </div>
+                            <div class="form-floating col-6">
+                                <input type="text" class="form-control" id="corLinha" placeholder="Cor da linha">
+                                <label for="lat">Cor da Linha</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6" id="paragensChecks">
+                                <!--checkboxes vão aqui-->
+                            </div>
+                            <div class="col-6" id="paragensLista"> 
+                                <!--paragens em ordem vão aqui-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeLinha">Close</button>
+                        <button type="button" class="btn btn-primary" id="addlinha">Adicionar</button>
+                    </div>
                 </div>
             </div>
         </div>

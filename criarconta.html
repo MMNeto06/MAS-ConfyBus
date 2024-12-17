@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro e Login</title>
+    <!-- Link para o CSS do Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center" style="min-height: 100vh; padding-top: 20px;">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <form id="registerForm" class="bg-white p-4 rounded shadow">
+                    <h2 class="text-center mb-4">Registro de Utilizador</h2>
+
+                    <!-- Mensagens -->
+                    <div id="errorMessage" class="alert alert-danger d-none">Por favor, preencha todos os campos corretamente!</div>
+
+                    <div id="successMessage" class="alert alert-success d-none"></div>
+
+                    <!-- Nome de Utilizador -->
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nome de Utilizador</label>
+                        <input type="text" id="username" class="form-control" placeholder="Digite seu nome" required>
+                    </div>
+
+                    <!-- E-mail -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail" required>
+                    </div>
+
+                    <!-- Senha -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" class="form-control" placeholder="Digite sua senha" required>
+                    </div>
+
+                    <!-- Confirmar Senha -->
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Repita a sua Password</label>
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Digite sua senha novamente" required>
+                    </div>
+
+                    <!-- Deficiência -->
+                    <div class="mb-3">
+                        <label for="disability" class="form-label">Tem algum tipo de deficiência?</label>
+                        <input type="text" id="disability" class="form-control" placeholder="Descrição (opcional)">
+                    </div>
+
+                    <!-- Checkbox Não Sou Robô -->
+                    <div class="form-check mb-3">
+                        <input type="checkbox" id="notRobot" class="form-check-input" required>
+                        <label for="notRobot" class="form-check-label">Não sou um robô</label>
+                    </div>
+
+                    <!-- Botão Criar Conta -->
+                    <button type="button" class="btn btn-dark w-100 mb-2" onclick="saveUserData()">Criar Conta</button>
+
+                    <!-- Botão Criar Conta para Empresas -->
+                    <button type="button" class="btn btn-success w-100 mb-2" onclick="window.location.href='contaempresa.html'">Criar Conta para Empresas</button>
+
+                    <!-- Link para Login -->
+                    <div class="text-center">
+                        <a href="login.html" class="text-decoration-none">Já tem uma conta? Faça login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link para o JS do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="criarconta.js"></script>
+      
+
+    
+</body>
+</html>
