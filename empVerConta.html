@@ -1,14 +1,18 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <title>Detalhes da conta</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css"
+        rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css'
+        rel='stylesheet'>
     <link href="StyleSheet.css" rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar fixed-top mb-1 pb-1">
         <div class="container-fluid">
@@ -19,34 +23,32 @@
             <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Confybus</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Confybus Empresas</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="procurar.html">Procurar autocarros</a>
+                            <a class="nav-link active" aria-current="page" href="empGestao.html">Gerir paragens, linhas e
+                                horários</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="mapaTempoReal.html">Mapa ao vivo</a>
+                            <a class="nav-link" href="empFrota.html">Monotorizar frota</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="confyFlex.html">ConfyFlex</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="bilhetescomprados.html">Viagens reservadas</a>
+                            <a class="nav-link" href="empPassageiros.html">Estatísticas de passageiros</a>
                         </li>
                     </ul>
                 </div>
                 <span><a href="contatos.html" target="_blank"><button type="button" class="btn" aria-label="Sobre nós">Sobre
-                            nós</button></span></a>
-                <span><a href="index.html"><button type="button" class="btn" aria-label="Logout">Logout</button></span></a>
+                            nós</button></a></span>
+                <span><a href="index.html"><button type="button" class="btn" aria-label="Logout">Logout</button></a></span>
                 <span><button type="button" class="btn" aria-label="Sair">Sair</button></span>
             </div>
             <div class="text-center">
-                <h1>ConfyBus</h1>
+                <h1>ConfyBus Empresas</h1>
             </div>
-            <a href="verConta.html"><button class="btn btn-lg btn-outline-success" type="submit">
+            <a href="empVerConta.html"><button class="btn btn-lg btn-outline-success" type="submit">
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </button></a>
         </div>
@@ -101,4 +103,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
 </body>
+
 </html>

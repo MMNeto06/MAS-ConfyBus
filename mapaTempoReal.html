@@ -13,10 +13,12 @@
 <body>
     <nav class="navbar fixed-top mb-1 pb-1">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Confybus</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -33,20 +35,21 @@
                             <a class="nav-link" href="confyFlex.html">ConfyFlex</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Viagens reservadas</a>
+                            <a class="nav-link" href="bilhetescomprados.html">Viagens reservadas</a>
                         </li>
                     </ul>
                 </div>
-                <span><button type="button" class="btn" aria-label="Sobre nós">Sobre nós</button></span>
-                <span><button type="button" class="btn" aria-label="Logout">Logout</button></span>
+                <span><a href="contatos.html" target="_blank"><button type="button" class="btn" aria-label="Sobre nós">Sobre
+                            nós</button></span></a>
+                <span><a href="index.html"><button type="button" class="btn" aria-label="Logout">Logout</button></span></a>
                 <span><button type="button" class="btn" aria-label="Sair">Sair</button></span>
             </div>
             <div class="text-center">
                 <h1>ConfyBus</h1>
             </div>
-            <button class="btn btn-lg btn-outline-success" type="submit">
-                <i class="fa fa-user" aria-hidden="true"></i>
-            </button>
+            <a href="verConta.html"><button class="btn btn-lg btn-outline-success" type="submit">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </button></a>
         </div>
     </nav>
 
@@ -66,14 +69,14 @@
         <div class="card d-none" id="card">
             <div id="map" style="height: 400px;"></div>
             <div class="card-body">
-                <h5 class="card-title" id="linha">Linha 18 - ...</h5>
-                <p class="card-text" id="origem">Origem: </p>
-                <p class="card-text" id="destino">Destino: </p>
-                <p class="card-text" id="hora_prevista">Hora de chegada prevista: </p>
-                <p class="card-text" id="paragem">Paragem atual: </p>
-                <p class="card-text" id="ataraso">Atraso: </p>
-                <p class="card-text" id="id_viagem">ID da viagem: </p>
-                <a href="#" class="btn btn-dark">Ver horário completo</a> <!--ou abre modal ou aba nova no separador-->
+                <h5 class="card-title" id="linha"></h5>
+                <p class="card-text" id="origem"></p>
+                <p class="card-text" id="destino"></p>
+                <p class="card-text" id="hora_prevista"></p>
+                <p class="card-text" id="paragem"></p>
+                <p class="card-text" id="ataraso"></p>
+                <p class="card-text" id="id_viagem"></p>
+                <a href="#" class="btn btn-dark"></a> <!--ou abre modal ou aba nova no separador-->
             </div>
         </div>
         

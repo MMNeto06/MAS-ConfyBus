@@ -57,9 +57,9 @@ $('#button-addon1').click(function(){
     if (linhasNomes.includes(linhaNome)){
         $("#card").addClass("d-block");
         $("#card").removeClass("d-none");
-        var indexLst = linhasNomes.indexOf(linhaNome);
-        polyline = L.polyline(linhasCoords[indexLst], {color: linhasCores[indexLst]}).bindPopup(linhasNomes[indexLst]).addTo(map);
-        $("#linha")
+        var i = linhasNomes.indexOf(linhaNome);
+        polyline = L.polyline(linhasCoords[i], {color: linhasCores[i]}).bindPopup(linhasNomes[i]).addTo(map);
+        $("#linha").text(linhasNomes[i])
     }
     else{
         $("#card").addClass("d-none");
