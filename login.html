@@ -30,6 +30,17 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" id="password" class="form-control" placeholder="Digite sua senha" required>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tipo de Login</label>
+                        <div>
+                            <input type="radio" id="user" name="loginType" value="user" required>
+                            <label for="user">Utilizador</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="company" name="loginType" value="company" required>
+                            <label for="company">Empresa</label>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-dark w-100">Entrar</button>
                 </form>
             </div>
@@ -46,23 +57,28 @@
             // Captura os valores dos campos
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value.trim();
+            const loginType = document.querySelector('input[name="loginType"]:checked').value;
             const errorMessage = document.getElementById("errorMessage");
 
             // Buscar os dados armazenados no LocalStorage
             const users = JSON.parse(localStorage.getItem("users")) || [];
             const companies = JSON.parse(localStorage.getItem("companies")) || [];
 
-            // Verificar se o e-mail e a senha correspondem a um usuário ou empresa
-            const userMatch = users.find(user => user.email === email && user.password === password);
-            const companyMatch = companies.find(company => company.companyEmail === email && company.companyPassword === password);
-
-            if (userMatch || companyMatch) {
-                // Se as credenciais estiverem corretas
-                alert("Login bem-sucedido! Redirecionando...");
-                window.location.href = "entrar.html"; // Redireciona para entrar.html
-            } else {
-                // Exibe mensagem de erro
-                errorMessage.textContent = "E-mail ou senha incorretos. Tente novamente!";
+            // Verificar se o e-mail e a senha correspondem ao tipo selecionado
+            if (loginType === "user") {
+                const userMatch = users.find(user => user.email === email && user.password === password);
+                if (userMatch) {
+                    window.location.href = "entrar.html";
+                } else {
+                    errorMessage.textContent = "E-mail ou senha de utilizador incorretos. Tente novamente!";
+                }
+            } else if (loginType === "company") {
+                const companyMatch = companies.find(company => company.companyEmail === email && company.companyPassword === password);
+                if (companyMatch) {
+                    window.location.href = "entrarempresa.html";
+                } else {
+                    errorMessage.textContent = "E-mail ou senha de empresa incorretos. Tente novamente!";
+                }
             }
         }
     </script>
