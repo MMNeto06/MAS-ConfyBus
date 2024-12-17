@@ -16,8 +16,28 @@
             background-color: #f9f9f9;
         }
         #multibanco-card {
-            width: 50%;
+            width: 30%;
             margin: 0 auto 100px auto; 
+            border: 1px solid #000000;
+            box-shadow: 0 4px 10px 0 #d9f6d6;
+        }
+        #paypal-card {
+            width: 30%;
+            margin: 0 auto 100px auto; 
+            border: 1px solid #000000;
+            box-shadow: 0 4px 10px 0 #d9f6d6;
+        }
+        #cartao-card {
+            width: 30%;
+            margin: 0 auto 100px auto; 
+            border: 1px solid #000000;
+            box-shadow: 0 4px 10px 0 #d9f6d6;
+        }
+        #mbway-card {
+            width: 20%;
+            margin: 0 auto 100px auto;
+            border: 1px solid #000000;
+            box-shadow: 0 4px 10px 0 #d9f6d6;
         }
 
     </style>
@@ -64,66 +84,66 @@
                 </button></a>
         </div>
     </nav>
-    <!-- ko ifnot: showMultibanco && showPayPal && showCartao && showMBWay-->
-    <div class="payment-container" >
-        <!-- Multibanco -->
-        <div class="payment-option" data-bind="click: selectMultibanco">
-            <div class="payment-text">
-                <img src="assets/img/mb.png" alt="Multibanco">
-                Multibanco
+    <div data-bind="visible: !showMultibanco() && !showPayPal() && !showCartao() && !showMBWay() ">
+        <div class="payment-container">
+            <!-- Multibanco -->
+            <div class="payment-option" data-bind="click: selectMultibanco">
+                <div class="payment-text">
+                    <img src="assets/img/mb.png" alt="Multibanco">
+                    Multibanco
+                </div>
+                <div class="payment-arrow">➔</div>
             </div>
-            <div class="payment-arrow">➔</div>
-        </div>
-        <!-- PayPal -->
-        <div class="payment-option" data-bind="click: selectPayPal">
-            <div class="payment-text">
-                <img src="assets/img/paypal.png" alt="PayPal">
-                PayPal
+            <!-- PayPal -->
+            <div class="payment-option" data-bind="click: selectPayPal">
+                <div class="payment-text">
+                    <img src="assets/img/paypal.png" alt="PayPal">
+                    PayPal
+                </div>
+                <div class="payment-arrow">➔</div>
             </div>
-            <div class="payment-arrow">➔</div>
-        </div>
-        <!-- Cartão bancário -->
-        <div class="payment-option" data-bind="click: selectCartao">
-            <div class="payment-text">
-                <img src="assets/img/visa.png" alt="Cartão bancário">
-                Cartão bancário
+            <!-- Cartão bancário -->
+            <div class="payment-option" data-bind="click: selectCartao">
+                <div class="payment-text">
+                    <img src="assets/img/visa.png" alt="Cartão bancário">
+                    Cartão bancário
+                </div>
+                <div class="payment-arrow">➔</div>
             </div>
-            <div class="payment-arrow">➔</div>
-        </div>
-        <!-- MB WAY -->
-        <div class="payment-option" data-bind="click: selectMBWay">
-            <div class="payment-text">
-                <img src="assets/img/mb_way.png" alt="MB WAY">
-                MB WAY
+            <!-- MB WAY -->
+            <div class="payment-option" data-bind="click: selectMBWay">
+                <div class="payment-text">
+                    <img src="assets/img/mb_way.png" alt="MB WAY">
+                    MB WAY
+                </div>
+                <div class="payment-arrow">➔</div>
             </div>
-            <div class="payment-arrow">➔</div>
         </div>
     </div>
-    <!-- /ko -->
     <!-- ko if: showMultibanco -->
     <div class="card mt-3" id="multibanco-card">
-        <div class="card-body" >
+        <div class="card-body">
             <h2 class="card-title">Referência Multibanco</h2>
-            <p class="card-text">Entidade: <span data-bind="text: entidade"></span></p>
-            <p class="card-text">Referência: <span data-bind="text: referencia"></span></p>
+            <p class="card-text">Entidade: 125478</p>
+            <p class="card-text">Referência:  <span data-bind="text: referencia"></span></p>
             <p class="card-text">Valor: <span data-bind="text: valor"></span>€</p>
         </div>
     </div>
     <!-- /ko -->
-    <!-- ko if: showPayPal -->
-    <div class="paypal-container">
-        <div class="paypal-text">
-            <h2>PayPal</h2>
-            <p>Para pagar com PayPal, clique no botão abaixo.</p>
-            <button class="btn btn-primary">Pagar com PayPal</button>
+    <div data-bind="visible: showPayPal">
+        <div class="card mt-3" id="paypal-card">
+            <div class="card-body">
+                <h2 class="card-title">PayPal</h2>
+                <p class="card-text">Para pagar com PayPal, clique no botão abaixo.</p>
+                <button class="btn btn-primary" data-bind="click: payWithPayPal">Pagar com PayPal</button>
+            </div>
         </div>
     </div>
-    <!-- /ko -->
     <!-- ko if: showCartao -->
-    <div class="cartao-container">
-        <div class="cartao-text">
-            <h2>Cartão bancário</h2>
-            <p>Para pagar com cartão bancário, insira os dados do seu cartão.</p>
+    <div class="card mt-3" id="cartao-card">
+        <div class="card-body">
+            <h2 class="card-title">Cartão bancário</h2>
+            <p class="card-text">Para pagar com cartão bancário, insira os dados do seu cartão.</p>
             <form>
                 <div class="mb-3">
                     <label for="cardNumber" class="form-label">Número do cartão</label>
@@ -141,22 +161,22 @@
                     <label for="cardCVC" class="form-label">CVC</label>
                     <input type="text" class="form-control" id="cardCVC">
                 </div>
-                <button type="submit" class="btn btn-primary">Pagar</button>
+                <button type="submit" data-bind="click: payWithCartao" class="btn btn-primary">Pagar</button>
             </form>
         </div>
     </div>
     <!-- /ko -->
     <!-- ko if: showMBWay -->
-    <div class="mbway-container">
-        <div class="mbway-text">
-            <h2>MB WAY</h2>
-            <p>Para pagar com MB WAY, insira o seu número de telemóvel.</p>
+    <div class="card mt-3" id="mbway-card">
+        <div class="card-body">
+            <h2 class="card-title">MB WAY</h2>
+            <p class="card-text">Para pagar com MB WAY, insira o seu número de telemóvel.</p>
             <form>
                 <div class="mb-3">
                     <label for="mbwayNumber" class="form-label">Número de telemóvel</label>
                     <input type="text" class="form-control" id="mbwayNumber">
                 </div>
-                <button type="submit" class="btn btn-primary">Pagar</button>
+                <button type="submit" data-bind="click: payWithMBWAY" class="btn btn-primary">Pagar</button>
             </form>
         </div>
     </div>
@@ -172,6 +192,8 @@
             self.showPayPal = ko.observable(false);
             self.showCartao = ko.observable(false);
             self.showMBWay = ko.observable(false);
+            self.referencia = ko.observable(Array.from({length: 9}, () => Math.floor(Math.random() * 9) + 1).join(''));
+            self.valor = ko.observable("10 ");
             self.selectMultibanco = function() {
                 self.showMultibanco(true);
                 self.showPayPal(false);
@@ -195,6 +217,17 @@
                 self.showPayPal(false);
                 self.showCartao(false);
                 self.showMBWay(true);
+            };
+            self.payWithPayPal = function() {
+                alert("Irá ser redirecionado para o site do PayPal.");
+            };
+            self.payWithCartao = function() {
+                if ($("#cardNumber").val() === "" || $("#cardName").val() === "" || $("#cardDate").val() === "" || $("#cardCVC").val() === "") {
+                    alert("Por favor, preencha todos os campos.");
+                    return;
+                }
+                else
+                    alert("Pagamento efetuado com sucesso.");
             };
         }
         ko.applyBindings(new ViewModel());
