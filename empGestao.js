@@ -96,8 +96,6 @@ $(document).ready(function(){
 
     map.on('click', onMapClick);
 
-    
-
     $('#paragem').click(function () {
         console.log('adicionar nova paragem');
     });
@@ -118,18 +116,46 @@ $(document).ready(function(){
             `;
             $container.append(check);
         }
+
+        var checkboxes = document.querySelectorAll('input[type=checkbox]');
+        console.log("checkboxes", checkboxes)
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', event => {
+                console.log(`Checkbox com valor ${event.target.value} foi ${(event.target.checked ? 'selecionado' : 'deselecionado')}.`);
+                if (event.target.checked){
+                    novaLInha.push(event.target.value);
+                }
+                else {
+                    var remove = novaLInha.indexOf(event.target.value);
+                    novaLInha.splice(remove, 1);
+                }
+                console.log(novaLInha)
+
+                const $listagem = $("#paragensLista")
+                $listagem.empty();
+                $listagem.append('<ul class="list-group">')
+                for (var i = 0; i < novaLInha.length; i++) {
+                    const check = `
+                        <li class="list-group-item">${paragensNomes[novaLInha[i]]}</li>
+                    `;
+                    $listagem.append(check);
+                }
+                $listagem.append('</ul>')
+            });
+        })
+
+        
     })
 
-    // Seleciona todos os checkboxes com o nome "paragem"
-    const checkboxes = document.querySelectorAll('input[name="paragem"]');
-
-    // Adiciona o listener a cada checkbox
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', event => {
-            console.log(`Checkbox com valor ${event.target.value} foi ${(event.target.checked ? 'selecionado' : 'deselecionado')}.`);
-        });
-    });
-
+    $('#fecharLinha').click(function () {
+        novaLInha = [];
+        console.log("nova linha limpado")
+    })
+    $('#closeLinha').click(function () {
+        novaLInha = [];
+        console.log("nova linha limpado")
+    })
 
     $('#addParagem').click(function () {
         var lat = $("#lat").val();
@@ -148,4 +174,25 @@ $(document).ready(function(){
             alert("Faltam dados para adicionar a paragem")
         }
     });
+
+    $("#addlinha").click(function () {
+        var nome = $("#nameLinha").val();
+        var cor = $("#corLinha").val();
+
+        if(nome != "" && cor != "" && novaLInha.length > 1){
+            console.log("nova linha", nome, cor, novaLInha);
+            var novaLInhaCoords = [];
+            for(var i = 0; i<novaLInha.length; i++){
+                novaLInhaCoords.push(paragensCoords[novaLInha[i]]);
+            }
+            linhasCoords.push(novaLInhaCoords);
+            linhasCores.push(cor);
+            linhasNomes.push(nome);
+            $("#linhaModal").modal('hide');
+            L.polyline(novaLInhaCoords, { color: cor}).bindPopup(nome).addTo(map);
+        }
+        else{
+            alert("Faltam dados para adicionar a linha")
+        }
+    })
 });

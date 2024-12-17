@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Completo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">ConfyBus Dashboard</a>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="#dados-demograficos">Dados Demográficos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#padroes-utilizacao">Padrões de Utilização</a></li>
+                <li class="nav-item"><a class="nav-link" href="#rotas">Rotas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard Principal -->
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Dashboard ConfyBus</h1>
+        <div class="row">
+            <div class="col-md-6"><canvas id="faixaEtariaChart"></canvas></div>
+            <div class="col-md-6"><canvas id="horasPicoChart"></canvas></div>
+        </div>
+    </div>
+
+    <!-- Dados Demográficos -->
+    <div id="dados-demograficos" class="container my-5">
+        <h2 class="text-center mb-4">Dados Demográficos</h2>
+        <div class="row">
+            <div class="col-md-6"><canvas id="generoChart"></canvas></div>
+            <div class="col-md-6"><canvas id="faixaEtariaChart2"></canvas></div>
+        </div>
+    </div>
+
+    <!-- Padrões de Utilização -->
+    <div id="padroes-utilizacao" class="container my-5">
+        <h2 class="text-center">Padrões de Utilização</h2>
+        <canvas id="horariosChart"></canvas>
+    </div>
+
+    <!-- Rotas -->
+    <div id="rotas" class="container my-5">
+        <h2 class="text-center">Rotas Mais Usadas</h2>
+        <canvas id="rotasChart"></canvas>
+    </div>
+
+    <script>
+        // Faixa Etária (Dashboard Principal)
+        new Chart(document.getElementById('faixaEtariaChart'), {
+            type: 'bar',
+            data: { labels: ['0-12', '13-18', '19-30', '31-60', '60+'], datasets: [{ data: [60, 150, 400, 300, 120], backgroundColor: '#FF8C00' }] },
+            options: { plugins: { title: { display: true, text: 'Faixa Etária' } } }
+        });
+
+        // Horas de Pico
+        new Chart(document.getElementById('horasPicoChart'), {
+            type: 'line',
+            data: { labels: ['6h', '9h', '12h', '15h', '18h'], datasets: [{ data: [50, 300, 150, 180, 400], borderColor: '#007BFF', fill: true }] },
+            options: { plugins: { title: { display: true, text: 'Picos de Utilização' } } }
+        });
+
+        // Distribuição de Gênero
+        new Chart(document.getElementById('generoChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Masculino', 'Feminino'],
+                datasets: [{ data: [55, 45], backgroundColor: ['#3498DB', '#E74C3C'] }]
+            },
+            options: { plugins: { title: { display: true, text: 'Distribuição de Gênero' } } }
+        });
+
+        // Faixa Etária (Dados Demográficos)
+        new Chart(document.getElementById('faixaEtariaChart2'), {
+            type: 'bar',
+            data: { labels: ['0-12', '13-18', '19-30', '31-60', '60+'], datasets: [{ data: [60, 150, 400, 300, 120], backgroundColor: '#FF8C00' }] },
+            options: { plugins: { title: { display: true, text: 'Distribuição Etária' } } }
+        });
+
+        // Horários de Utilização
+        new Chart(document.getElementById('horariosChart'), {
+            type: 'line',
+            data: { labels: ['6h', '9h', '12h', '15h', '18h', '21h'], datasets: [{ label: 'Passageiros', data: [50, 300, 150, 200, 400, 120], borderColor: '#1ABC9C', fill: true }] },
+            options: { plugins: { title: { display: true, text: 'Horários de Utilização' } } }
+        });
+
+        // Rotas Mais Usadas
+        new Chart(document.getElementById('rotasChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Rota A', 'Rota B', 'Rota C', 'Rota D'],
+                datasets: [{ label: 'Passageiros', data: [300, 500, 200, 150], backgroundColor: '#8E44AD' }]
+            },
+            options: { plugins: { title: { display: true, text: 'Comparacão de Rotas' } } }
+        });
+    </script>
+</body>
+</html>

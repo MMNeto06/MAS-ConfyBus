@@ -27,11 +27,11 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="empGestao.html">Gerir paragens, linhas e
+                            <a class="nav-link" aria-current="page" href="empGestao.html">Gerir paragens, linhas e
                                 horários</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="empFrota.html">Monotorizar frota</a>
+                            <a class="nav-link active" href="empFrota.html">Monotorizar frota</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Estatísticas de passageiros</a>
@@ -58,23 +58,21 @@
 
         <div class="row">
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top" alt="placeholder">
+                <div id="autocarrosChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Autocarros</h5>
                     <p class="card-text">Gráfico representando todos os autocarros atualmente em circulação e fora de serviço</p>
                 </div>
             </div>
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
-                    alt="placeholder">
+                <div id="autocarrosLinhaChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Autocarros por linha</h5>
                     <p class="card-text">Gráfico representando a distribuição dos autocarros por linha</p>
                 </div>
             </div>
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
-                    alt="placeholder">
+                <<div id="kmLinhaChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Quilómetros percorridos linha</h5>
                     <p class="card-text">Gráfico de barras representando quantos quilómetros foram percorridos pelos autocarros de cada linha</p>
@@ -84,8 +82,7 @@
 
         <div class="row">
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
-                    alt="placeholder">
+                <div id="custosChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Custos</h5>
                     <p class="card-text">Gráfico de barras representando a distribuição dos custos, incluindo manutenção,
@@ -93,16 +90,14 @@
                 </div>
             </div>
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
-                    alt="placeholder">
+                <div id="custosLinhaChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Custos por linha</h5>
                     <p class="card-text">Gráfico representando quanto é que cada linha consome</p>
                 </div>
             </div>
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
-                    alt="placeholder">
+                <div id="custosMêsChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Custos por mês</h5>
                     <p class="card-text">Gráfico de barras que mostra quanto dinheiro está a ser gasto por mês</p>
@@ -112,24 +107,21 @@
 
         <div class="row">
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
-                    alt="placeholder">
+                <div id="lucrosChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Lucros</h5>
                     <p class="card-text">Gráfico mostrando quaanto foi gasto e quanto foi lucrado</p>
                 </div>
             </div>
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
-                    alt="placeholder">
+                <div id="lucrosLinhaChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Lucros por linha</h5>
                     <p class="card-text">Gráfico representando quanto é que cada linha lucra</p>
                 </div>
             </div>
             <div class="card col-4">
-                <img src="https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png" class="card-img-top"
-                    alt="placeholder">
+                <div id="lucrosMêsChart" style="height:400px; width: 400px;"></div>
                 <div class="card-body">
                     <h5 class="card-title">Lucros por mês</h5>
                     <p class="card-text">Gráfico de barras que mostra quais são os lucros por mês</p>
@@ -139,19 +131,13 @@
 
 
     </div>
-    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <script>
-        var map = L.map('map').setView([39.521111, -8.089217], 6);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 20,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-    </script>
+    <script src="empFrota.js"></script>
 </body>
 </html>
