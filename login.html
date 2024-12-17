@@ -68,14 +68,14 @@
             if (loginType === "user") {
                 const userMatch = users.find(user => user.email === email && user.password === password);
                 if (userMatch) {
-                    window.location.href = "entrar.html";
+                    window.location.href = "procurar.html";
                 } else {
                     errorMessage.textContent = "E-mail ou senha de utilizador incorretos. Tente novamente!";
                 }
             } else if (loginType === "company") {
                 const companyMatch = companies.find(company => company.companyEmail === email && company.companyPassword === password);
                 if (companyMatch) {
-                    window.location.href = "entrarempresa.html";
+                    window.location.href = "empGestao.html";
                 } else {
                     errorMessage.textContent = "E-mail ou senha de empresa incorretos. Tente novamente!";
                 }
