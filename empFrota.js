@@ -57,29 +57,6 @@ $(document).ready(function () {
         "green",
     ]
 
-    function drawLinhas(coordslst, nomes) {
-        for (var i = 0; i < coordslst.length; i++) {
-            var polyline = L.polyline(coordslst[i], { color: linhasCores[i] }).bindPopup(nomes[i]).addTo(map);
-            console.log(nomes[i], coordslst[i])
-        }
-    }
-
-    function drawParagens(coords, nomes) {
-        for (var i = 0; i < coords.length; i++) {
-            var marker = L.marker([coords[i][0], coords[i][1]]).bindPopup(nomes[i]).addTo(map);
-            console.log(coords[i], nomes[i])
-        }
-    }
-
-    var map = L.map('map').setView([40.642224, -8.643631], 9);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 20,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    drawParagens(paragensCoords, paragensNomes);
-    drawLinhas(linhasCoords, linhasNomes);
-
     google.load("visualization", "1", { packages: ["corechart"] });
     google.setOnLoadCallback(drawChartAutocarros);
     google.setOnLoadCallback(drawChartAutocarrosLinha);
