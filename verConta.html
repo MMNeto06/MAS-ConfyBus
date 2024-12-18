@@ -54,51 +54,97 @@
 
     <div class="container mt-5">
         <h4>Detalhes da conta</h4>
-        <div class="account-details">
+        <div class="account-details" >
             <div class="row">
                 <label for="nameInput">Nome:</label>
-                <input type="text" id="nameInput" class="form-control" disabled>
+                <input type="text" id="nameInput" class="form-control">
             </div>
             <div class="row">
                 <label for="emailInput">Email:</label>
-                <input type="email" id="emailInput" class="form-control" disabled>
+                <input type="email" id="emailInput" class="form-control">
             </div>
             <div class="row">
                 <label for="phoneInput">Telefone:</label>
-                <input type="tel" id="phoneInput" class="form-control" disabled>
+                <input type="tel" id="phoneInput" class="form-control">
             </div>
             <div class="row">
                 <label for="addressInput">Morada:</label>
-                <input type="text" id="addressInput" class="form-control" disabled>
+                <input type="text" id="addressInput" class="form-control">
             </div>
             <div class="row">
                 <label for="nifInput">NIF:</label>
-                <input type="text" id="nifInput" class="form-control" disabled>
+                <input type="text" id="nifInput" class="form-control">
             </div>
         </div>
     </div>
+
 
     <div class="container mt-5">
         <h4>Informações adicionais</h4>
         <div class="additional-details">
             <div class="row">
                 <label for="borndateInput">Data de nascimento:</label>
-                <input type="date" id="borndateInput" class="form-control" disabled>
+                <input type="date" id="borndateInput" class="form-control">
             </div>
 
             <div class="row">
                 <label for="genderInput">Género:</label>
-                <input type="text" id="genderInput" class="form-control" disabled>
+                <input type="text" id="genderInput" class="form-control">
             </div>
             <div class="row">
                 <label for="nationalitieInput">Nacionalidade</label>
-                <input type="text" id="nationalitieInput" class="form-control" disabled>
+                <input type="text" id="nationalitieInput" class="form-control">
             </div>
         </div>
+
     </div>
+
+    <div class="text-center mt-3">
+        <button id="saveDetails" class="btn btn-success">Salvar Detalhes</button>
+    </div>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch data from localStorage
+            const storedData = localStorage.getItem('users');
+            const users = JSON.parse(storedData) || [];
+
+            if (users.length > 0) {
+                const user = users[0]; // Assuming you want to display the first user
+
+                // Populate account details
+                document.getElementById('nameInput').value = user.username || '';
+                document.getElementById('emailInput').value = user.email || '';
+                document.getElementById('phoneInput').value = user.phone || '';
+                document.getElementById('addressInput').value = user.address || '';
+                document.getElementById('nifInput').value = user.nif || '';
+                document.getElementById('borndateInput').value = user.borndate || '';
+                document.getElementById('genderInput').value = user.gender || '';
+                document.getElementById('nationalitieInput').value = user.nationality || '';
+            }
+
+            // Save details to localStorage
+            document.getElementById('saveDetails').addEventListener('click', function () {
+                const updatedUser = {
+                    username: document.getElementById('nameInput').value,
+                    email: document.getElementById('emailInput').value,
+                    phone: document.getElementById('phoneInput').value,
+                    address: document.getElementById('addressInput').value,
+                    nif: document.getElementById('nifInput').value,
+                    borndate: document.getElementById('borndateInput').value,
+                    gender: document.getElementById('genderInput').value,
+                    nationality: document.getElementById('nationalitieInput').value
+                };
+
+                localStorage.setItem('users', JSON.stringify([updatedUser]));
+                alert('Detalhes salvos com sucesso!');
+            });
+        });
+    </script>
 </body>
 </html>

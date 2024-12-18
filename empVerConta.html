@@ -59,23 +59,23 @@
         <div class="account-details">
             <div class="row">
                 <label for="nameInput">Nome:</label>
-                <input type="text" id="nameInput" class="form-control" disabled>
+                <input type="text" id="nameInput" class="form-control">
             </div>
             <div class="row">
                 <label for="emailInput">Email:</label>
-                <input type="email" id="emailInput" class="form-control" disabled>
+                <input type="email" id="emailInput" class="form-control">
             </div>
             <div class="row">
                 <label for="phoneInput">Telefone:</label>
-                <input type="tel" id="phoneInput" class="form-control" disabled>
+                <input type="tel" id="phoneInput" class="form-control">
             </div>
             <div class="row">
                 <label for="addressInput">Morada:</label>
-                <input type="text" id="addressInput" class="form-control" disabled>
+                <input type="text" id="addressInput" class="form-control">
             </div>
             <div class="row">
                 <label for="nifInput">NIF:</label>
-                <input type="text" id="nifInput" class="form-control" disabled>
+                <input type="text" id="nifInput" class="form-control">
             </div>
         </div>
     </div>
@@ -85,19 +85,92 @@
         <div class="additional-details">
             <div class="row">
                 <label for="borndateInput">Data de nascimento:</label>
-                <input type="date" id="borndateInput" class="form-control" disabled>
+                <input type="date" id="borndateInput" class="form-control">
             </div>
 
             <div class="row">
                 <label for="genderInput">Género:</label>
-                <input type="text" id="genderInput" class="form-control" disabled>
+                <input type="text" id="genderInput" class="form-control">
             </div>
             <div class="row">
                 <label for="nationalitieInput">Nacionalidade</label>
-                <input type="text" id="nationalitieInput" class="form-control" disabled>
+                <input type="text" id="nationalitieInput" class="form-control">
             </div>
         </div>
     </div>
+
+    <div class="text-center mt-3">
+        <button id="saveDetails" class="btn btn-success">Salvar Detalhes</button>
+    </div>
+
+    <div class="container mt-5">
+        <h4>Faturamento da Empresa</h4>
+        <div class="billing-details">
+            <canvas id="billingChart"></canvas>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch data from localStorage
+            const storedData = localStorage.getItem('companies');
+            const companies = JSON.parse(storedData) || [];
+
+            if (companies.length > 0) {
+                const company = companies[0]; // Assuming you want to display the first company
+
+                // Populate account details
+                document.getElementById('nameInput').value = company.companyName || '';
+                document.getElementById('emailInput').value = company.companyEmail || '';
+                document.getElementById('phoneInput').value = company.companyPhone || '';
+                document.getElementById('addressInput').value = company.companyAddress || '';
+                document.getElementById('nifInput').value = company.companyNIF || '';
+                document.getElementById('borndateInput').value = company.companyBorndate || '';
+                document.getElementById('genderInput').value = company.companyGender || '';
+                document.getElementById('nationalitieInput').value = company.companyNationality || '';
+            }
+
+            // Save details to localStorage
+            document.getElementById('saveDetails').addEventListener('click', function () {
+                const updatedCompany = {
+                    companyName: document.getElementById('nameInput').value,
+                    companyEmail: document.getElementById('emailInput').value,
+                    companyPhone: document.getElementById('phoneInput').value,
+                    companyAddress: document.getElementById('addressInput').value,
+                    companyNIF: document.getElementById('nifInput').value,
+                    companyBorndate: document.getElementById('borndateInput').value,
+                    companyGender: document.getElementById('genderInput').value,
+                    companyNationality: document.getElementById('nationalitieInput').value
+                };
+
+                localStorage.setItem('companies', JSON.stringify([updatedCompany]));
+                alert('Detalhes salvos com sucesso!');
+            });
+
+            // Initialize billing chart
+            var ctx = document.getElementById('billingChart').getContext('2d');
+            var billingChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    datasets: [{
+                        label: 'Faturamento (em €)',
+                        data: [12000, 15000, 18000, 20000, 22000, 25000, 27000, 30000, 35000, 32000, 30000, 40000],
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
