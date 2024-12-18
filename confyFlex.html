@@ -16,7 +16,7 @@
             background-color: #fff;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            width: 25%;
+            width: 400px;
             text-align: center;
             padding: 20px;
             margin-top: 20px;
@@ -41,7 +41,7 @@
         }
         .container .progress {
             height: 100%;
-            width: 0; /* Inicialmente sem progresso */
+            width: 0;
             background-color: #00aaff;
             transition: width 0.5s ease;
         }
@@ -58,12 +58,25 @@
             background-color: #ccc;
             color: #fff;
             font-size: 16px;
-            cursor: not-allowed;
-            transition: background-color 0.3s;
         }
-        .container button.active {
+        .container button#resgatar1 {
+            cursor: not-allowed;
+        }
+        .container button#resgatar2 {
             background-color: #00aaff;
             cursor: pointer;
+        }
+        .overlay-text {
+        position: absolute;
+        top: 120px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgb(255, 255, 255);
+        padding: 7px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+        text-align: center;
         }
     </style>
 </head>
@@ -120,6 +133,20 @@
                 </div>
             </div>
         </div>
+        <div class="overlay-text" id="overlayText" style="display: none;">
+            <h2>Regulamento da ConfyFlex</h2>
+            <p>
+                • O utilizador poderá resgatar o desconto de 25% na próxima viagem , se tiver 30 pontos de viagens de média distância. 
+                Estes pontos são obtidos ao fazer viagens de média distância onde ganhará 10 pontos por cada viagem de média distância feitos.
+            </p>
+            <p>
+                • O utilizador poderá resgatar o desconto de 30% na próxima viagem , se tiver 30 pontos de viagens de longa distância. 
+                Estes pontos são obtidos ao fazer viagens de longa distância onde ganhará 15 pontos por cada viagem de longa distância.
+            </p>
+            <p>
+                • O utilizador terá um desconto imediato de 15% na viagem se fizer reserva 30 dias antes do dia da viagem.
+            </p>
+        </div>
         <div class="container">
             <h2>Desconto</h2>
             <p>25% na próxima viagem</p>
@@ -127,28 +154,22 @@
                 <div class="progress" id="progress"></div>
             </div>
             <div class="info" id="info">
-                • Pontos restantes de viagens de média distância para obter desconto: 30 
+                <p>• Quantidade de pontos de viagens de média distância: 0</p>
+                <p>• Pontos restantes de viagens de média distância para obter desconto: 30</p> 
             </div>
-            <button id="resgatar" disabled>Resgatar</button>
+            <button id="resgatar1" disabled>Resgatar</button>
         </div>
         <div class="container">
             <h2>Desconto</h2>
             <p>30% na próxima viagem</p>
             <div class="progress-bar">
-                <div class="progress" id="progress"></div>
+                <div class="progress" id="progress" style="width: 100%;"></div>
             </div>
             <div class="info" id="info">
-                • Pontos restantes de viagens de longa distância para obter desconto: 30 
+                <p>• Quantidade de pontos de viagens de longa distância: 30</p>
+                <p>• Pontos restantes de viagens de longa distância para obter desconto: 0</p>
             </div>
-            <button id="resgatar">Resgatar</button>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Regulamento da ConfyFlex</h2>
-            <p> • Para adquirir 25% de desconto na próxima viagem, precisa de 30 pontos de viagens de média distância. Cada viagem de média distância, dará-lhe 10 pontos de viagens de média distância. </p>
+            <a href="confyFlex1.html"><button id="resgatar2" >Resgatar</button></a>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
@@ -156,20 +177,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script>
-        var modal = document.getElementById("myModal");
-        var btn = document.getElementById("infoButton");
-        var span = document.getElementsByClassName("close")[0];
-        btn.onclick = function() {
-            var rect = btn.getBoundingClientRect();
-        }
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
+        document.getElementById('infoButton').addEventListener('click', function() {
+            var overlayText = document.getElementById('overlayText');
+            if (overlayText.style.display === 'none' || overlayText.style.display === '') {
+                overlayText.style.display = 'block';
+            } else {
+                overlayText.style.display = 'none';
             }
-        }   
+        });
     </script>
 </body>
 </html>
