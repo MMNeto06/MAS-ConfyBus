@@ -61,7 +61,7 @@
                             <ul style="list-style-type: none;">
                                 <li class="pb-3"><button type="button" id="paragem" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#paragemModal">Adicionar paragens</button></li>
                                 <li class="pb-3"><button type="button" id="linha" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#linhaModal">Adicionar linha</button></li>
-                                <li class="pb-3"><button type="button" id="horario" class="btn btn-lg btn-primary">Ajustar horários</button></li>
+                                <li class="pb-3"><button type="button" id="horario" class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#horarioModal">Ajustar horários</button></li>
                             </ul>
                         </div>
                     </div>
@@ -129,6 +129,30 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeLinha">Close</button>
+                        <button type="button" class="btn btn-primary" id="addlinha">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="horarioModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Ajustar horários</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            id="fecharLinha"></button>
+                    </div>
+                    <div class="modal-body">
+                        <select class="form-select" aria-label="Default select example" id="select"></select>
+                        <table class="table table-bordered">
+                            <tbody id="tabela">
+                                <!--tabela vai aqui-->
+                            </tbody>
+                        </table>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeLinha">Close</button>

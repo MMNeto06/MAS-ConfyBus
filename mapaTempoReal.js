@@ -3,6 +3,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
+var marker;
+var polyline;
+
 
 
 var paragensCoords = [
@@ -28,7 +31,8 @@ var paragensNomes = [
     "Estarreja",
     "Válega",
     "Ovar",
-]
+];
+
 var linhasCoords = [
     [
         [40.643959, -8.638941],
@@ -48,61 +52,69 @@ var linhasCoords = [
         [40.751342, -8.574918],
         [40.643959, -8.638941],
     ]
-]
+];
 
 var linhasNomes = [
     "Linha 18: Aveiro - Figueira da Foz",
     "Linha 37: Aveiro - Sever do Vouga",
     "Linha 33: Aveiro - Ovar"
-]
+];
 
 var infoLinha = [
     ["Aveiro", "Figueira da Foz", "12h50", "Camara de Ílhavo", "2 minutos", "15420e"],
     ["Aveiro", "Sever do Vouga", "11h00", "Aveiro", "0 minutos", "wer123"],
     ["Aveiro", "Ovar", "10h30", "Estarreja", "10 minutos", "f3gs21"],
-]
+];
 
 var linhasCores = [
     "red",
     "#57a595",
     "#57a595",
-]
+];
 
-var marker = L.marker(paragensCoords[0]).addTo(map);
-var polyline = L.polyline(linhasCoords[0], { color: linhasCores[0] }).bindPopup(linhasNomes[0]).addTo(map);
 
-$("#autocomplete").autocomplete({
-    source: linhasNomes
-});
+var marker = L.marker([0, 0]).bindPopup("Eu não existo estás a imaginar-me");
+var polyline = L.polyline([[0,0], [0.0001,0.0001]], { color: 'blue'}).bindPopup("Eu não existo estás a imaginar-me");
+map.addLayer(marker);
+map.addLayer(polyline);
+
+
 
 $('#button-addon1').click(function(){
-    map.removeLayer(marker)
-    map.removeLayer(polyline)
-    console.log("a")
+    map.removeLayer(marker);
+    map.removeLayer(polyline);
+    console.log("a");
     var linhaNome = $("#autocomplete").val();
-    console.log(linhaNome)
+    console.log(linhaNome);
     if (linhasNomes.includes(linhaNome)){
-        $("#card").addClass("d-block");
-        $("#card").removeClass("d-none");
         var i = linhasNomes.indexOf(linhaNome);
-        polyline = L.polyline(linhasCoords[i], {color: linhasCores[i]}).bindPopup(linhasNomes[i]).addTo(map);
+        polyline = L.polyline(linhasCoords[i], {color: linhasCores[i]}).bindPopup(linhasNomes[i])
         $("#linha").text(linhasNomes[i]);
-
-        $("#origem").text(infoLinha[i][0])
-        $("#destino").text(infoLinha[i][1])
-        $("#hora_prevista").text(infoLinha[i][2])
-        $("#paragem").text(infoLinha[i][3])
-        $("#atraso").text(infoLinha[i][4])
-        $("#id_viagem").text(infoLinha[i][5])
+        $("#origem").text(infoLinha[i][0]);
+        $("#destino").text(infoLinha[i][1]);
+        $("#hora_prevista").text(infoLinha[i][2]);
+        $("#paragem").text(infoLinha[i][3]);
+        $("#atraso").text(infoLinha[i][4]);
+        $("#id_viagem").text(infoLinha[i][5]);
         
-        console.log(paragensNomes.indexOf[infoLinha[i][3]])
-        var paragemAtual = paragensNomes.indexOf[infoLinha[i][3]];
-        marker = L.marker(paragensCoords[paragemAtual]).addTo(map);
+        console.log(infoLinha[i][3]);
+        var paragemAtual = infoLinha[i][3]
+        var paragemAtualI = paragensNomes.indexOf(paragemAtual);
+        console.log(paragemAtualI);
+        marker = L.marker(paragensCoords[paragemAtualI])
+        map.addLayer(marker);
+        map.addLayer(polyline);
+        map.fitBounds(polyline.getBounds());
         
     }
     else{
-        $("#card").addClass("d-none");
-        $("#card").removeClass("d-block");
         alert("Linha não encontrada, tente novamente");
+        $("#linha").text("");
+        $("#origem").text("");
+        $("#destino").text("");
+        $("#hora_prevista").text("");
+        $("#paragem").text("");
+        $("#atraso").text("");
+        $("#id_viagem").text("");
     }
 });

@@ -195,4 +195,51 @@ $(document).ready(function(){
             alert("Faltam dados para adicionar a linha")
         }
     })
+
+    $("#horario").click(function(){
+        console.log("alterar horarios");
+        const $select = $("#select")
+        $select.empty();
+
+        const opDefault = `
+                <option value="">Selecione uma linha</option>
+            `;
+        $select.append(opDefault);
+        for (var i = 0; i < linhasNomes.length; i++) {
+            const op = `
+                <option value="${i}">${linhasNomes[i]}</option>
+            `;
+            $select.append(op);
+        }
+    })
+
+    $("#select").change(function(){
+        var opcao = $("#select").val();
+        console.log(opcao);
+        const $table = $("#tabela");
+        $table.empty();
+        if(opcao!=""){
+            for (var i = 0; i < linhasCoords[opcao].length; i++) {
+                console.log(linhasCoords[opcao][i]);
+                var index = paragensCoords.findIndex(coord =>
+                    coord[0] === linhasCoords[opcao][i][0] && coord[1] === linhasCoords[opcao][i][1]
+                );
+                console.log("Index:", index);
+                var nome = paragensNomes[index]
+                const row = `
+                <tr>
+                    <th scope="row">${nome}</th>
+                    <td><input class="form-control" type="text" /></td>
+                    <td><input class="form-control" type="text" /></td>
+                    <td><input class="form-control" type="text" /></td>
+                    <td><input class="form-control" type="text" /></td>
+                    <td><input class="form-control" type="text" /></td>
+                    <td><input class="form-control" type="text" /></td>
+                    <td><input class="form-control" type="text" /></td>
+                </tr>
+            `;
+                $table.append(row);
+            };
+        };
+    });
 });
