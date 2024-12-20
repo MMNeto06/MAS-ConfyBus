@@ -4,24 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Link para o Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            height: 100vh;
-            margin: 0;
-        }
-    </style>
 </head>
 <body class="d-flex justify-content-center align-items-center">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 col-lg-4">
-                <form class="bg-white p-4 rounded shadow" onsubmit="return checkLogin(event)">
+                <form id="loginForm" class="bg-white p-4 rounded shadow" onsubmit="return checkLogin(event)">
                     <h1 class="text-center mb-4">Login</h1>
-                    <div class="error-message text-danger mb-3 text-center" id="errorMessage"></div>
+                    <div id="errorMessage" class="text-danger text-center mb-3"></div>
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
                         <input type="email" id="email" class="form-control" placeholder="Digite seu e-mail" required>
@@ -47,40 +38,77 @@
         </div>
     </div>
 
-    <!-- Link para o Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
+        // Dados predefinidos
+        const defaultUsers = [
+            { username: "Felizardo Xavier", email: "felizardo@gmail.com", password: "111111", disability: "" },
+            { username: "Artur Yavorskyy", email: "artur@gmail.com", password: "987654", disability: "" },
+            { username: "Daniel Rodrigues", email: "daniel@gmail.com", password: "323232", disability: "" },
+            { username: "Geovana Lourenço", email: "geovana@gmail.com", password: "787878", disability: "" },
+            { username: "Miguel Neto", email: "miguel@gmail.com", password: "454545", disability: "" }
+        ];
+
+        const defaultCompanies = [
+            { companyName: "Zardo", companyEmail: "felizardo17@ua.pt", companyNIF: "322689678", companyPassword: "123456" },
+            { companyName: "dddd", companyEmail: "felizardo17@ua", companyNIF: "333333333", companyPassword: "222222222" },
+            { companyName: "dddd", companyEmail: "felizardo@ua.pt", companyNIF: "111111111", companyPassword: "aaaaaa" },
+            { companyName: "Zardogang", companyEmail: "empresa1@ua.pt", companyNIF: "123456789", companyPassword: "Z12345" },
+            { companyName: "empresa", companyEmail: "a@ua.pt", companyNIF: "222222222", companyPassword: "222222" },
+            { companyName: "Rede Expressos", companyEmail: "rede@gmail.com", companyNIF: "102938475", companyPassword: "123456" }
+        ];
+
+        // Inicializar Local Storage sem sobrescrever novos dados
+        function initializeLocalStorage() {
+            // Recuperar dados existentes
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            let companies = JSON.parse(localStorage.getItem('companies')) || [];
+
+            // Mesclar dados predefinidos com os existentes
+            users = [...new Map([...defaultUsers, ...users].map(user => [user.email, user])).values()];
+            companies = [...new Map([...defaultCompanies, ...companies].map(company => [company.companyEmail, company])).values()];
+
+            // Atualizar Local Storage
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('companies', JSON.stringify(companies));
+        }
+
+        // Verificar credenciais no Login
         function checkLogin(event) {
-            event.preventDefault(); // Evita o envio padrão do formulário
+            event.preventDefault(); // Evita o envio do formulário
 
-            // Captura os valores dos campos
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
             const loginType = document.querySelector('input[name="loginType"]:checked').value;
-            const errorMessage = document.getElementById("errorMessage");
+            const errorMessage = document.getElementById('errorMessage');
 
-            // Buscar os dados armazenados no LocalStorage
-            const users = JSON.parse(localStorage.getItem("users")) || [];
-            const companies = JSON.parse(localStorage.getItem("companies")) || [];
+            // Limpar mensagens de erro
+            errorMessage.textContent = '';
 
-            // Verificar se o e-mail e a senha correspondem ao tipo selecionado
-            if (loginType === "user") {
+            // Obter dados do Local Storage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const companies = JSON.parse(localStorage.getItem('companies')) || [];
+
+            if (loginType === 'user') {
                 const userMatch = users.find(user => user.email === email && user.password === password);
                 if (userMatch) {
-                    window.location.href = "procurar.html";
+                    alert(`Login realizado com sucesso! Bem-vindo(a), ${userMatch.username}!`);
+                    window.location.href = 'procurar.html'; // Página do utilizador
                 } else {
-                    errorMessage.textContent = "E-mail ou senha de utilizador incorretos. Tente novamente!";
+                    errorMessage.textContent = 'E-mail ou senha de utilizador incorretos!';
                 }
-            } else if (loginType === "company") {
+            } else if (loginType === 'company') {
                 const companyMatch = companies.find(company => company.companyEmail === email && company.companyPassword === password);
                 if (companyMatch) {
-                    window.location.href = "empGestao.html";
+                    alert(`Login realizado com sucesso! Bem-vindo(a), ${companyMatch.companyName}!`);
+                    window.location.href = 'empGestao.html'; // Página da empresa
                 } else {
-                    errorMessage.textContent = "E-mail ou senha de empresa incorretos. Tente novamente!";
+                    errorMessage.textContent = 'E-mail ou senha de empresa incorretos!';
                 }
             }
         }
+
+        // Inicializar Local Storage ao carregar a página
+        window.onload = initializeLocalStorage;
     </script>
 </body>
 </html>
