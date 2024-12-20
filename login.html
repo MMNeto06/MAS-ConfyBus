@@ -39,7 +39,6 @@
     </div>
 
     <script>
-        // Dados predefinidos
         const defaultUsers = [
             { username: "Felizardo Xavier", email: "felizardo@gmail.com", password: "111111", disability: "" },
             { username: "Artur Yavorskyy", email: "artur@gmail.com", password: "987654", disability: "" },
@@ -57,34 +56,27 @@
             { companyName: "Rede Expressos", companyEmail: "rede@gmail.com", companyNIF: "102938475", companyPassword: "123456" }
         ];
 
-        // Inicializar Local Storage sem sobrescrever novos dados
         function initializeLocalStorage() {
-            // Recuperar dados existentes
             let users = JSON.parse(localStorage.getItem('users')) || [];
             let companies = JSON.parse(localStorage.getItem('companies')) || [];
 
-            // Mesclar dados predefinidos com os existentes
             users = [...new Map([...defaultUsers, ...users].map(user => [user.email, user])).values()];
             companies = [...new Map([...defaultCompanies, ...companies].map(company => [company.companyEmail, company])).values()];
 
-            // Atualizar Local Storage
             localStorage.setItem('users', JSON.stringify(users));
             localStorage.setItem('companies', JSON.stringify(companies));
         }
 
-        // Verificar credenciais no Login
         function checkLogin(event) {
-            event.preventDefault(); // Evita o envio do formulário
+            event.preventDefault();
 
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
             const loginType = document.querySelector('input[name="loginType"]:checked').value;
             const errorMessage = document.getElementById('errorMessage');
 
-            // Limpar mensagens de erro
             errorMessage.textContent = '';
 
-            // Obter dados do Local Storage
             const users = JSON.parse(localStorage.getItem('users')) || [];
             const companies = JSON.parse(localStorage.getItem('companies')) || [];
 
@@ -92,7 +84,7 @@
                 const userMatch = users.find(user => user.email === email && user.password === password);
                 if (userMatch) {
                     alert(`Login realizado com sucesso! Bem-vindo(a), ${userMatch.username}!`);
-                    window.location.href = 'procurar.html'; // Página do utilizador
+                    window.location.href = 'procurar.html';
                 } else {
                     errorMessage.textContent = 'E-mail ou senha de utilizador incorretos!';
                 }
@@ -100,14 +92,13 @@
                 const companyMatch = companies.find(company => company.companyEmail === email && company.companyPassword === password);
                 if (companyMatch) {
                     alert(`Login realizado com sucesso! Bem-vindo(a), ${companyMatch.companyName}!`);
-                    window.location.href = 'empGestao.html'; // Página da empresa
+                    window.location.href = 'empGestao.html';
                 } else {
                     errorMessage.textContent = 'E-mail ou senha de empresa incorretos!';
                 }
             }
         }
 
-        // Inicializar Local Storage ao carregar a página
         window.onload = initializeLocalStorage;
     </script>
 </body>

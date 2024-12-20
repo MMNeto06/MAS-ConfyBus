@@ -11,9 +11,9 @@
     <link href="StyleSheet.css" rel="stylesheet">
     <style>
         .ui-autocomplete {
-            z-index: 1051; /* Ensure it appears above Bootstrap components */
+            z-index: 1051;
             max-height: 200px;
-            overflow-y: auto; /* Add scrollbar if necessary */
+            overflow-y: auto;
             overflow-x: hidden;
         }
     </style>
@@ -34,10 +34,10 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="procurar.html">Procurar autocarros</a>
+                            <a class="nav-link" aria-current="page" href="procurar.html">Procurar autocarros</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="mapaTempoReal.html">Mapa ao vivo</a>
+                            <a class="nav-link active" href="mapaTempoReal.html">Mapa ao vivo</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="confyFlex.html">ConfyFlex</a>
@@ -83,7 +83,7 @@
                 <p class="card-text">Paragem atual: <span id="paragem"></span></p>
                 <p class="card-text">Atraso: <span id="atraso"></span></p>
                 <p class="card-text">Id da viagem: <span id="id_viagem"></span></p>
-                <a id="horario" href="#" target="_blank" class="btn btn-dark">Ver horário</a> <!--ou abre modal ou aba nova no separador-->
+                <a id="horario" href="#" target="_blank" class="btn btn-dark">Ver horário</a>
             </div>
         </div>
     </div>
@@ -96,18 +96,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <!--<script>
-        $(document).ready(function(){
-            var linhasNomes = [
-                "Linha 18: Aveiro - Figueira da Foz",
-                "Linha 37: Aveiro - Sever do Vouga",
-                "Linha 33: Aveiro - Ovar",
-            ];
-            $("#autocomplete").autocomplete({
-                source: linhasNomes
-            });
-        });
-    </script>-->
     <script src="mapaTempoReal.js"></script>
 </body>
 </html>

@@ -9,11 +9,9 @@
     const errorMessage = document.getElementById("errorMessage");
     const successMessage = document.getElementById("successMessage");
 
-    // Resetar mensagens de erro e sucesso
     errorMessage.classList.add('d-none');
     successMessage.classList.add('d-none');
 
-    // Validações
     if (!companyName || !companyEmail || !companyNIF || !companyPassword || !confirmPassword) {
         errorMessage.textContent = 'Por favor, preencha todos os campos obrigatórios!';
         errorMessage.classList.remove('d-none');
@@ -39,27 +37,21 @@
         return;
     }
 
-    // Recuperar empresas existentes do Local Storage
     let companies = JSON.parse(localStorage.getItem('companies')) || [];
 
-    // Verificar duplicação de e-mail ou NIF
     if (companies.some(company => company.companyEmail === companyEmail || company.companyNIF === companyNIF)) {
         errorMessage.textContent = 'O e-mail ou NIF já está registrado!';
         errorMessage.classList.remove('d-none');
         return;
     }
 
-    // Adicionar nova empresa
     const newCompany = { companyName, companyEmail, companyNIF, companyPassword };
     companies.push(newCompany);
 
-    // Atualizar Local Storage
     localStorage.setItem('companies', JSON.stringify(companies));
 
-    // Mensagem de sucesso
     successMessage.textContent = 'Conta de empresa criada com sucesso!';
     successMessage.classList.remove('d-none');
 
-    // Limpar formulário
     document.getElementById('registerCompanyForm').reset();
 }
