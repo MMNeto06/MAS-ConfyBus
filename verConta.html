@@ -110,14 +110,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Fetch data from localStorage
             const storedData = localStorage.getItem('users');
             const users = JSON.parse(storedData) || [];
 
             if (users.length > 0) {
-                const user = users[0]; // Assuming you want to display the first user
-
-                // Populate account details
+                const user = users[0]; 
+             
                 document.getElementById('nameInput').value = user.username || '';
                 document.getElementById('emailInput').value = user.email || '';
                 document.getElementById('phoneInput').value = user.phone || '';
@@ -128,7 +126,6 @@
                 document.getElementById('nationalitieInput').value = user.nationality || '';
             }
 
-            // Save details to localStorage
             document.getElementById('saveDetails').addEventListener('click', function () {
                 const updatedUser = {
                     username: document.getElementById('nameInput').value,

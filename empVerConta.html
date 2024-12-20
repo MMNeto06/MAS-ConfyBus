@@ -112,14 +112,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Fetch data from localStorage
             const storedData = localStorage.getItem('companies');
             const companies = JSON.parse(storedData) || [];
 
             if (companies.length > 0) {
-                const company = companies[0]; // Assuming you want to display the first company
+                const company = companies[0]; 
 
-                // Populate account details
                 document.getElementById('nameInput').value = company.companyName || '';
                 document.getElementById('emailInput').value = company.companyEmail || '';
                 document.getElementById('phoneInput').value = company.companyPhone || '';
@@ -130,7 +128,6 @@
                 document.getElementById('nationalitieInput').value = company.companyNationality || '';
             }
 
-            // Save details to localStorage
             document.getElementById('saveDetails').addEventListener('click', function () {
                 const updatedCompany = {
                     companyName: document.getElementById('nameInput').value,
@@ -147,7 +144,6 @@
                 alert('Detalhes salvos com sucesso!');
             });
 
-            // Initialize billing chart
             var ctx = document.getElementById('billingChart').getContext('2d');
             var billingChart = new Chart(ctx, {
                 type: 'bar',
