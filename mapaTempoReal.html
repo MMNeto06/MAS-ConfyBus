@@ -6,10 +6,17 @@
     <title>Mapa dos autocarros em tempo real</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href=" https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link href="StyleSheet.css" rel="stylesheet">
+    <style>
+        .ui-autocomplete {
+            z-index: 1051; /* Ensure it appears above Bootstrap components */
+            max-height: 200px;
+            overflow-y: auto; /* Add scrollbar if necessary */
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar fixed-top mb-1 pb-1">
@@ -54,11 +61,10 @@
         </div>
     </nav>
 
-    <div class="container">
         <h3 class="text-center">Seguimento em tempo real</h3>
         <div class="d-flex justify-content-center">
             <div class="input-group w-auto">
-                <input type="text" class="form-control" placeholder="Procurar por um autocarro" aria-label="Procurar por um autocarro"
+                <input type="text" class="form-control ui-autocomplete" placeholder="Procurar por um autocarro" aria-label="Procurar por um autocarro"
                     aria-describedby="button-addon1" id="autocomplete"/>
                 <button class="btn btn-dark" type="button" id="button-addon1">
                     <i class="fa fa-search" aria-hidden="true"></i>
@@ -66,7 +72,7 @@
             </div>
         </div>
 
-
+    <div class="container">
         <div class="card" id="card">
             <div id="map" style="height: 400px;"></div>
             <div class="card-body">
@@ -77,32 +83,31 @@
                 <p class="card-text">Paragem atual: <span id="paragem"></span></p>
                 <p class="card-text">Atraso: <span id="atraso"></span></p>
                 <p class="card-text">Id da viagem: <span id="id_viagem"></span></p>
-                <a href="#" class="btn btn-dark">Ver horário</a> <!--ou abre modal ou aba nova no separador-->
+                <a id="horario" href="#" target="_blank" class="btn btn-dark">Ver horário</a> <!--ou abre modal ou aba nova no separador-->
             </div>
         </div>
-        
-
-        
     </div>
     
     
     
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.min.js"></script>
-    <script>
-        var linhasNomes = [
-            "Linha 18: Aveiro - Figueira da Foz",
-            "Linha 37: Aveiro - Sever do Vouga",
-            "Linha 33: Aveiro - Ovar"
-        ];
-        $("#autocomplete").typeahead({
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <!--<script>
+        $(document).ready(function(){
+            var linhasNomes = [
+                "Linha 18: Aveiro - Figueira da Foz",
+                "Linha 37: Aveiro - Sever do Vouga",
+                "Linha 33: Aveiro - Ovar",
+            ];
+            $("#autocomplete").autocomplete({
                 source: linhasNomes
+            });
         });
-    </script>
+    </script>-->
     <script src="mapaTempoReal.js"></script>
 </body>
 </html>
