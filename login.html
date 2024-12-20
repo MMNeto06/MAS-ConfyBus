@@ -51,20 +51,46 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Carregar dados diretamente no Local Storage
+        function loadDataToLocalStorage() {
+            const users = [
+                { "username": "Felizardo Xavier", "email": "felizardo@gmail.com", "password": "111111", "disability": "" },
+                { "username": "Artur Yavorskyy", "email": "artur@gmail.com", "password": "987654", "disability": "" },
+                { "username": "Daniel Rodrigues", "email": "daniel@gmail.com", "password": "323232", "disability": "" },
+                { "username": "Geovana Lourenço", "email": "geovana@gmail.com", "password": "787878", "disability": "" },
+                { "username": "Miguel Neto", "email": "miguel@gmail.com", "password": "454545", "disability": "" }
+            ];
+
+            const companies = [
+                { "companyName": "Zardo", "companyEmail": "felizardo17@ua.pt", "companyNIF": "322689678", "companyPassword": "123456" },
+                { "companyName": "dddd", "companyEmail": "felizardo17@ua", "companyNIF": "333333333", "companyPassword": "222222222" },
+                { "companyName": "dddd", "companyEmail": "felizardo@ua.pt", "companyNIF": "111111111", "companyPassword": "aaaaaa" },
+                { "companyName": "Zardogang", "companyEmail": "empresa1@ua.pt", "companyNIF": "123456789", "companyPassword": "Z12345" },
+                { "companyName": "empresa", "companyEmail": "a@ua.pt", "companyNIF": "222222222", "companyPassword": "222222" },
+                { "companyName": "Rede Expressos", "companyEmail": "rede@gmail.com", "companyNIF": "102938475", "companyPassword": "123456" }
+            ];
+
+            // Salvar no Local Storage
+            localStorage.setItem("users", JSON.stringify(users));
+            localStorage.setItem("companies", JSON.stringify(companies));
+
+            console.log("Dados carregados no Local Storage!");
+        }
+
+        // Verificar login
         function checkLogin(event) {
             event.preventDefault(); // Evita o envio padrão do formulário
 
-            // Captura os valores dos campos
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value.trim();
             const loginType = document.querySelector('input[name="loginType"]:checked').value;
             const errorMessage = document.getElementById("errorMessage");
 
-            // Buscar os dados armazenados no LocalStorage
+            errorMessage.textContent = "";
+
             const users = JSON.parse(localStorage.getItem("users")) || [];
             const companies = JSON.parse(localStorage.getItem("companies")) || [];
 
-            // Verificar se o e-mail e a senha correspondem ao tipo selecionado
             if (loginType === "user") {
                 const userMatch = users.find(user => user.email === email && user.password === password);
                 if (userMatch) {
@@ -81,6 +107,9 @@
                 }
             }
         }
+
+        // Carregar dados no Local Storage ao carregar a página
+        window.onload = loadDataToLocalStorage;
     </script>
 </body>
 </html>
