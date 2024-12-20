@@ -1,7 +1,6 @@
 ﻿function registerCompany(event) {
     event.preventDefault();
 
-    // Captura os valores dos campos
     const companyName = document.getElementById("companyName").value.trim();
     const companyEmail = document.getElementById("companyEmail").value.trim();
     const companyNIF = document.getElementById("companyNIF").value.trim();
@@ -10,80 +9,57 @@
     const errorMessage = document.getElementById("errorMessage");
     const successMessage = document.getElementById("successMessage");
 
-    // Limpa mensagens anteriores
-    errorMessage.classList.add("d-none");
-    successMessage.classList.add("d-none");
+    // Resetar mensagens de erro e sucesso
+    errorMessage.classList.add('d-none');
+    successMessage.classList.add('d-none');
 
-    // Validação de E-mail com Regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(companyEmail)) {
-        showError("Por favor, insira um e-mail válido!");
-        return;
-    }
-
-    // Validação de NIF
-    if (!/^[0-9]{9}$/.test(companyNIF)) {
-        showError("O NIF deve conter exatamente 9 dígitos.");
-        return;
-    }
-
-    // Validação da Senha
-    if (companyPassword.length < 6) {
-        showError("A senha deve ter pelo menos 6 caracteres.");
+    // Validações
+    if (!companyName || !companyEmail || !companyNIF || !companyPassword || !confirmPassword) {
+        errorMessage.textContent = 'Por favor, preencha todos os campos obrigatórios!';
+        errorMessage.classList.remove('d-none');
         return;
     }
 
     if (companyPassword !== confirmPassword) {
-        showError("As senhas não coincidem!");
+        errorMessage.textContent = 'As senhas não coincidem!';
+        errorMessage.classList.remove('d-none');
         return;
     }
 
-    // Recupera dados existentes no LocalStorage
-    const companies = JSON.parse(localStorage.getItem("companies")) || [];
-
-    // Verifica se o e-mail já existe
-    if (companies.some(company => company.companyEmail === companyEmail)) {
-        showError("Este e-mail já está registrado!");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(companyEmail)) {
+        errorMessage.textContent = 'Por favor, insira um e-mail válido!';
+        errorMessage.classList.remove('d-none');
         return;
     }
 
-    // Verifica se o NIF já existe
-    if (companies.some(company => company.companyNIF === companyNIF)) {
-        showError("Este NIF já está registrado!");
+    if (!/^\d{9}$/.test(companyNIF)) {
+        errorMessage.textContent = 'O NIF deve conter exatamente 9 dígitos!';
+        errorMessage.classList.remove('d-none');
         return;
     }
 
-    // Adiciona nova empresa
-    companies.push({
-        companyName,
-        companyEmail,
-        companyNIF,
-        companyPassword
-    });
+    // Recuperar empresas existentes do Local Storage
+    let companies = JSON.parse(localStorage.getItem('companies')) || [];
 
-    localStorage.setItem("companies", JSON.stringify(companies));
-    showSuccess("Empresa registrada com sucesso!");
+    // Verificar duplicação de e-mail ou NIF
+    if (companies.some(company => company.companyEmail === companyEmail || company.companyNIF === companyNIF)) {
+        errorMessage.textContent = 'O e-mail ou NIF já está registrado!';
+        errorMessage.classList.remove('d-none');
+        return;
+    }
 
-    // Limpa o formulário
-    clearFields();
-}
+    // Adicionar nova empresa
+    const newCompany = { companyName, companyEmail, companyNIF, companyPassword };
+    companies.push(newCompany);
 
-function showError(message) {
-    const errorMessage = document.getElementById("errorMessage");
-    errorMessage.textContent = message;
-    errorMessage.classList.remove("d-none");
-}
+    // Atualizar Local Storage
+    localStorage.setItem('companies', JSON.stringify(companies));
 
-function showSuccess(message) {
-    const successMessage = document.getElementById("successMessage");
-    successMessage.textContent = message;
-    successMessage.classList.remove("d-none");
-}
+    // Mensagem de sucesso
+    successMessage.textContent = 'Conta de empresa criada com sucesso!';
+    successMessage.classList.remove('d-none');
 
-function clearFields() {
-    document.getElementById("companyName").value = "";
-    document.getElementById("companyEmail").value = "";
-    document.getElementById("companyNIF").value = "";
-    document.getElementById("companyPassword").value = "";
-    document.getElementById("confirmPassword").value = "";
+    // Limpar formulário
+    document.getElementById('registerCompanyForm').reset();
 }

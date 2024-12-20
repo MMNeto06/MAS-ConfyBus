@@ -59,6 +59,27 @@ $(document).ready(function(){
 
     var novaLInha = [];
 
+    var horarios = [
+        [
+            ["8:00","9:15","10:05","","","",""],
+            ["8:05","9:20","10:10","","","",""],
+            ["8:15","9:30","10:20","","","",""],
+            ["8:30","","10:35","","","",""],
+            ["8:40","","","","","",""]
+        ],
+        [
+            ["8:00", "9:15", "10:05", "", "", "", ""],
+            ["8:05", "9:20", "10:10", "", "", "", ""],
+            ["8:15", "9:30", "10:20", "", "", "", ""],
+        ],
+        [
+            ["8:00", "9:15", "10:05", "", "", "", ""],
+            ["8:05", "9:20", "10:10", "", "", "", ""],
+            ["8:15", "9:30", "10:20", "", "", "", ""],
+            ["8:30", "", "10:35", "", "", "", ""],
+        ],
+    ]
+
     function drawLinhas(coordslst, nomes){
         for (var i = 0; i< coordslst.length; i++){
             var polyline = L.polyline(coordslst[i], { color: linhasCores[i] }).bindPopup(nomes[i]).addTo(map);
@@ -188,6 +209,7 @@ $(document).ready(function(){
             linhasCoords.push(novaLInhaCoords);
             linhasCores.push(cor);
             linhasNomes.push(nome);
+            horarios.push([]);
             $("#linhaModal").modal('hide');
             L.polyline(novaLInhaCoords, { color: cor}).bindPopup(nome).addTo(map);
         }
@@ -195,4 +217,90 @@ $(document).ready(function(){
             alert("Faltam dados para adicionar a linha")
         }
     })
+
+    $("#horario").click(function(){
+        console.log("alterar horarios");
+        const $select = $("#select")
+        $select.empty();
+
+        const opDefault = `
+                <option value="">Selecione uma linha</option>
+            `;
+        $select.append(opDefault);
+        for (var i = 0; i < linhasNomes.length; i++) {
+            const op = `
+                <option value="${i}">${linhasNomes[i]}</option>
+            `;
+            $select.append(op);
+        }
+    })
+
+    $("#select").change(function(){
+        var opcao = $("#select").val();
+        console.log(opcao);
+        const $table = $("#tabela");
+        $table.empty();
+        if(opcao!=""){
+            if(typeof horarios[opcao] !== "undefined"){
+                for (var i = 0; i < linhasCoords[opcao].length; i++) {
+                    console.log(linhasCoords[opcao][i]);
+                    var index = paragensCoords.findIndex(coord =>
+                        coord[0] === linhasCoords[opcao][i][0] && coord[1] === linhasCoords[opcao][i][1]
+                    );
+                    console.log("Index:", index);
+                    var nome = paragensNomes[index]
+                    const row = `
+                        <tr>
+                            <th scope="row">${nome}</th>
+                            <td><input class="form-control" type="text" value="${horarios[opcao][i][0]}"/></td>
+                            <td><input class="form-control" type="text" value="${horarios[opcao][i][1]}" /></td>
+                            <td><input class="form-control" type="text" value="${horarios[opcao][i][2]}" /></td>
+                            <td><input class="form-control" type="text" value="${horarios[opcao][i][3]}" /></td>
+                            <td><input class="form-control" type="text" value="${horarios[opcao][i][4]}" /></td>
+                            <td><input class="form-control" type="text" value="${horarios[opcao][i][5]}" /></td>
+                            <td><input class="form-control" type="text" value="${horarios[opcao][i][6]}" /></td>
+                        </tr>
+                    `;
+                    $table.append(row);
+                };
+            }
+            else{
+                for (var i = 0; i < linhasCoords[opcao].length; i++) {
+                    console.log(linhasCoords[opcao][i]);
+                    var index = paragensCoords.findIndex(coord =>
+                        coord[0] === linhasCoords[opcao][i][0] && coord[1] === linhasCoords[opcao][i][1]
+                    );
+                    console.log("Index:", index);
+                    var nome = paragensNomes[index]
+                    const row = `
+                        <tr>
+                            <th scope="row">${nome}</th>
+                            <td><input class="form-control" type="text" /></td>
+                            <td><input class="form-control" type="text" /></td>
+                            <td><input class="form-control" type="text" /></td>
+                            <td><input class="form-control" type="text" /></td>
+                            <td><input class="form-control" type="text" /></td>
+                            <td><input class="form-control" type="text" /></td>
+                            <td><input class="form-control" type="text" /></td>
+                        </tr>
+                    `;
+                    $table.append(row);
+                };
+            }
+        };
+    });
+
+    $("#addhorario").click(function () {
+        var opcao = $("#select").val();
+        const inputValues = [];
+        $("#tabela tr").each(function () {
+            const rowValues = [];
+            $(this).find("input").each(function () {
+                rowValues.push($(this).val());
+            });
+            inputValues.push(rowValues);
+        });
+        console.log(inputValues);
+        horarios[opcao] = inputValues;
+    });
 });
